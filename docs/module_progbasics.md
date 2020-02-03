@@ -90,33 +90,93 @@ If there is too much func call in the block and the hole reach its maximum  then
 #### What are the main parts of a function?
 1, Key word def marks start of a func header.
 2, Function name(unique) , we can identify the func with it.
-3,parameters → arguments , we pass values to the func. (they are optional)
+3, parameters → arguments , we pass values to the func. (they are optional)
 4, (:) Colon to mark the end of the header.
 5, Optional documentation string (docstrings) – describe what the func does.
 6, statement inside the func – they must have same indentation level.
 7, Option return statement to return a value from the function.
 
-### Programming languages - Python  
+### Programming languages - Python
+
 #### How do you use a dictionary in Python?
 Use {} marks to construct a dict and use [] to index it. Separate the key and value with : and with , between each pari. Keys must be with "" as with list we can print out the dict by printing the reference to it. The dict maps a set of objects (keys) to another set of objects (values). So a dict is mapping of unique keys to values.
+
 #### What does it mean that an object is immutable in Python?
 It means that you can not change their state or content. An immutable object can't be changed after it is created. There are built-in types like : int, float, string, bool, unicode, tuple
+
 #### What is conditional expression in Python?
 Expressions that return value A or B depending on whether a Boolian value is True or False.
 If you want the conditional expression to be evaluated first, you need to surround it with grouping parentheses.
+
 #### What are different types of arguments in Python?
+Default arguments - with using the assignment operator in python(=)
+
+keyword arguments - like def myfunc(a, b) --> myfunc(1, 3)
+
+Arbitrary arguments - in case you not know how many arg in the function, use (*). When function call python takes args into tuple and we can iterate over them with a for loop.
+
 #### What is variable shadowing? (context: variable scope)
+When there is a global variable and in the function you add  a new argument to the same variable name. When you call the func the variable arg will be that you named inside the func not the global one.
+
 #### What can happen if you try to delete/drop/add an item from a List, while you are iterating over it in Python?
+Remove and drop raises gives an index error because the loop can not iterate over all the item.
+To add new item is possible.
+
+
 #### What is the "golden rule" of variable scoping in Python (context: LEGB)? What is the lifetime of variables?
+LEGB: Local, Enclosed, Global, Built-in
+This is the hierarchy when you call a function with (x) arg. First it search the value inside the func(local) if there isn't goes to the outer func if there is after the global and finally the built-in which contains	special variables reserved for python itself.
+
+Lifetime of variables:
+
+-Local variables including function parameters have a life from the start of the execution of the function to the end of execution - i.e. the end of the function or the return statement.
+-Global variables live from when the module is imported until the end of the application - unless the variable is explicitly deleted.
+
 #### If you need to access the iterator variable after a for loop, how would you do it in Python?
+empty_list = []
+for i in x:
+	empty_list.append(i)
+	#Like that?
+
+
 #### What type of elements can a list contain in Python?
+- integers, strings, objects
+
 #### What is slice operator in Python and how to use?
+The slice operator is used to slice a given object(string,bytes,tuple,list or range)
+slice(1,2,-1) = slice(start, steps, end)
+
 #### What arithmetic operators (+,*,-,/) can be used on lists in Python? What do they do?
+"+" - You can add together to lists but you can not add together a list with a number it gives TypeError
+"*" - same as addition
+"-" - It gives TypeError anyway
+"/" - Same as abstruction
+
+You can use all if you iterate through the list and when you append it to a new list you can use
+them what they meant to be.
+
+
 #### What is the purpose of the in and not in membership operators in Python?
+ It test for membership in a sequence, such as strings, lists, or tuples.
+ The ‘in’ operator is used to check if a value exists in a sequence or not. Evaluates to true if it finds a variable in the specified sequence and false otherwise, 'not in' vica-versa.
+
+
 #### What does the + operator mean when used with strings in Python?
+It adds the strings to each other to make one string in the given order.
 #### Explain f strings in Python?
+F string is more readable, more concise, and less prone to error than other ways of formatting and they are also faster!
+better then %formating() or str.format() this is the upgrade of %formating - You can reference variables in any order by referencing their index, but still looks messy when you use multiply parameters and longer strings.
+
+"F-strings" aka "Formatted string literals". Because f-strings are evaluated at runtime, you can put any and all valid Python expressions in them. You can also call function or call method diretly. You can have multiline string using f""" hello {expression i.e. name} - expressions replaced with their values.
+
+
 #### Name 4 iterable types in Python!
+list, string, tuple, dictionary, file objects
+
 #### What is the difference between list/set/dictionary comprehension and a generator expression in Python?
+Generator expression is similar to list comprehensions, but it doesn't construct a list	object, it generates the next element in demand.It allows us to create a generator without yield keyword.(yield saves the state of the func and can be picked up from the same state when next func call). The generator yields one item at a time and generates item only when in demand. 
+Generator expressions are more memory and time efficent then list comprehensions.
+
 #### Does the order of the function definitions matter in Python? Why?
 #### What does unpacking mean in Python?
 #### What happens when you try to assign the result of a function which has no return statement to a variable in Python?
