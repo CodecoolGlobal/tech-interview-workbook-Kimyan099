@@ -1,3 +1,6 @@
+
+
+
 # Web with Python questions
 
 ## Software design
@@ -13,10 +16,11 @@
 - Using Join for multiply tables
 
 #### What layers can you name in a simple web application?
--  Controllers - entry point of request(http, Action Authorization, response)
--  Services - like Resource Authorization. Resource permission stored inside the database
-- Repositories*database) - This simply makes the code easier to read. The method you use to persist data (writing to file, DB, etc.) has nothing to do with the business logic that we are executing and so it would only get in the way.
-- Domain
+
+- View -> deals with the presentation of the content and interaction with the user.
+- Business Logic -> deals with the logic of the program. It receives data from the upper level and transforms it, using in the inner application logic.
+- Database -> deals with data retrieval from its sources
+
 
 ### Error handling
 #### What error can occur, when an array does not have an element on the requested index?
@@ -187,9 +191,20 @@ func2 = func
 func2()
 ```
 #### List the ways of defining a callable logical unit in JavaScript!
-We break code down, starting with the functions. Rather than having one function that does everything, strive to have many functions, with each function only doing one thing.
-Comments may help explain what the code is doing,
-
+-   arrow function
+```
+    const foo = (arg1, arg2) => {
+        ...
+    };
+```
+-   concise method syntax:
+```
+    let obj = {
+        myMethod(arg1, arg2) {
+            ...
+        }
+    };
+```    
 #### What is an event listener? How to attach one?
 An event listener is a method attaches an event handler to the specified element.
 ```
@@ -197,7 +212,9 @@ let button = document.queryselectorAll("button");
 button.addEventListener("click", buttonClick);
 ```
 #### How to trigger an event in JavaScript?
-It depends what is the event listener triggered on. It could be a click or key press or any other impulse that you attached for it.
+To create the event you want to fire, you can use either createEvent or createEventObject depending on the browser. 
+let event = new Event('build')
+
 #### What is a callback function? Tell some examples of its usage.
 A callback function is a function passed into another function as an argument, which is then invoked inside the outer function to complete some kind of routine or action like another function. When that function ends the the main function can start running.
 It can be synchronous or asynchronous.
@@ -236,17 +253,19 @@ Hi
 ```
 
 #### What is the difference between synchronous and asynchronous execution?
-The synchronous execution is executing immediately like forEach in js. 
-In an asynchronous function like fetch is not waiting for executing everything line by line, when it start to fetch the data the function goes toward and the fetch is executing outside the function and when it ends the result goes to the end of the function. 
+The synchronous execution is executing immediately like `forEach()` in J*avascript*. 
+When you execute something asynchronously, you can move on to another task before it finishes.
 
 ## Programming languages
 
 ### SQL
 
 #### How can you connect your application to a database server? What are the possible ways?
-Using environment variables. We have to define these variables first and use a database adapter like psycopg2 to make it secure. Whit these we can connect our sql database to out application.
+Using environment variables. We have to define these variables first and use a database adapter like psycopg2 to make it secure. Whit these we can connect our `SQL` database to our application.
 #### When do you use the DISTINCT keyword in SQL?
 Inside a table, a column often contains many duplicate values; and sometimes you only want to list the different (distinct) values. With the distinct keyword it's only give us one row even if there is more with the same properties.
+In short:
+*When you don't want to duplicate in a query*.
 #### What are aggregate functions in SQL? Give 3 examples.
 An aggregate function performs a calculation one or more values and returns a single value. The aggregate function is often used with the group by clause and having clause of the SELECT statement.
 Select max(rating) as max_rating From table
@@ -272,7 +291,6 @@ Indexing is a way of sorting a number of records on multiple fields. Creating an
 
 This analogy is known as **"Full Table Scan"** in database world.
 
-[![enter image description here](https://i.stack.imgur.com/Mnuvr.jpg)](https://i.stack.imgur.com/Mnuvr.jpg)
 
 But with an index page, you know where to go! And more, to lookup any particular Chapter that matters, you just need to look over the index page, again and again, every time. After finding the matching index you can efficiently jump to that chapter by skipping the rest.
 #### What are database transactions? When to use?
