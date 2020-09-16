@@ -69,3 +69,25 @@ Because in hashmap the key it's like an index, it points to the corresponding va
 
 #### What is a garbage collector, in a nutshell?
 In runtime, automatically removes unused objects to free up space in memory.
+
+## Programming paradigms
+
+### Procedural
+
+#### What is casting? What is the difference between up vs downcasting?
+Upcasting is casting to a supertype, while downcasting is casting to a subtype.
+Upcasting is always allowed, but downcasting involves a type check and can throw a ClassCastException.
+
+Example :
+```java
+//Upcasting is allowed here since every Circle is a shape.
+Shape circleShape = New Circle;
+Shape castShape = Shape(circleShape)
+```
+```java
+//Downcasting is not allowed here since not every shape is a circle.The compler will throw //ClassCastException.
+Shape shape = New Shape();
+Shape notShape = Circle(shape);
+```
+#### Which order should we catch the exceptions? Why?
+The order is basically that first to exception that matches then that one will be executed an so on. You should always catch the most specific first and then the most generic (as RuntimeException or Exception). 
