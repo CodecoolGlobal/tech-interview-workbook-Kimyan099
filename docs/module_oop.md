@@ -64,3 +64,8 @@ You can access the key by the value or the value by the key like an index.
 #### Why is it important for keys in a map to have an immutable type? (Consider String for example.)
 
 Because in hashmap the key it's like an index, it points to the corresponding value. If you could change the value of the key then you couldn't find the corresponding value in the hashmap.
+
+### Other
+
+#### What is a garbage collector, in a nutshell?
+In runtime, automatically removes unused objects to free up space in memory.
