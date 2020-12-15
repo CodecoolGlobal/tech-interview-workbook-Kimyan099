@@ -1,73 +1,423 @@
-# General enterprise questions
+
+
+
+># General enterprise questions
 
 ## Software engineering
 
 ### Architectures
 
 #### What is n-tier (or multi-tier) architecture?
-#### What are microservices? Advantages and disadvantages?
-#### What is Separation of Concerns?
-#### What is a layered design and why is it important in enterprise applications?
-#### What is Dependency Injection?
-#### What is the DAO pattern? When and how to implement?
-#### What is SOA? When to use?
+In the n-tire or multi-tier architecture the main three layer is separated physically and logically. That ensures that the services are provided without resources being shared. The N stands for any number from 1.
 
+- Presentation tier: This is the user interface - Translate task and results to something that the user can understand.
+
+- Logic tier: Moves data between the other two layers. This layer perform calculations,
+process the commands and makes logical decisions to coordinate the application.
+
+- Data tier: This is where the information stored and retrieved from database.The information being processed on the next level.
+
+By segregating an application into tiers, developers can create flexible and reusable applications with the option of modifying or adding a specific layer, instead of reworking the entire application.
+
+#### What are microservices? Advantages and disadvantages?
+Microservices is an architecture used to separate a monolithic application into several independent services,  a suite of small services were each running in its own process. These services are loosely connected and can be deployed independently, however they may use different programming languages and data storage technologies. The result is the same as with monolithic applications.
+
+*Advatages:*
+- Smaller and faster deployments: Smaller codebases and scope = quicker deployments
+- Scalability: Since your services are separate, you can more easily scale the most needed ones at the appropriate times, as opposed to the whole application
+- Eliminate vendor or technology lock-in: Microservices provide the flexibility to try out a new technology stack on an individual service as needed.
+- Improved fault isolation: Larger applications can remain mostly unaffected by the failure of a single module.
+- Testing one service is much easier and the developers can compare the tests with other services test's.
+
+*Disadvantages*
+- Microservices are more complex
+- Microservices are often more expensive (More services equals more resources)
+- Global testing is difficult
+- Microservices can present security threats
+- Large vs small product companies: Microservices are great for large companies, but can be slower to implement and too complicated for small companies
+
+#### What is Separation of Concerns?
+Separation of concerns (SoC) is a design principle for separating a computer program into distinct sections such that each section addresses a separate concern. At a low level, this principle is closely related to the Single Responsibility Principle of object oriented programming. For example the business logic of the application is a concern and the user interface is another concern. Changing the user interface should not require changes to business logic and vice versa. The design will be more maintainable, less tightly coupled, and less likely to violate the Don’t Repeat Yourself principle. When concerns are well-separated, individual sections can be reused, as well as developed and updated independently. At an architectural level, separation of concerns is a key component of building layered applications.
+#### What is a layered design and why is it important in enterprise applications?
+In a layered architecture the components are separated into four layers, presentation, business, persistence and the database layer. These layers are self-independent meaning that all the components are interconnected but do not depend on each other. The request goes though from the top to the bottom since these layers are work together however they provide layers of isolation. 
+One of the improvement of this design pattern that we can change one layer completely without change anything in the other layers. Its easy to test the separated layers and also not hard to implement however it's difficult to scale and if we change a layer then we have to redeploy the whole application since it must be deployed as a singular unit.
+#### What is Dependency Injection?
+Dependency injection is a technique whereby one object supplies the dependencies of another object. Dependency injection is basically providing the objects that an object needs (its dependencies) instead of having it construct them itself. 
+
+Dependencies can be injected into objects by many means:
+1. constructor injection
+2. setter injection
+3. interface injection
+4. dependency injection frameworks (e.g. Spring)
+
+So now its the dependency injection’s responsibility to:
+
+- Create the objects
+- Know which classes require those objects
+- And provide them all those objects
+
+If there is any change in objects, then DI looks into it and it should not concern the class using those objects. This way if the objects change in the future, then its DI’s responsibility to provide the appropriate objects to the class.
+
+Inversion of control —the concept behind DI
+This states that a class should not configure its dependencies statically but should be configured by some other class from outside.
+
+Benefits of using DI:
+- Helps in Unit testing.
+- Boiler plate code is reduced, as initializing of dependencies is done by the injector - component.
+- Extending the application becomes easier.
+- Helps to enable loose coupling, which is important in application programming.
+#### What is the DAO pattern? When and how to implement?
+The Data Access Object (DAO) pattern is a structural pattern that allows us to isolate the application / business layer from the persistence layer (usually a relational database, but it could be any other persistence mechanism) using an abstract API. The functionality of this API is to hide from the application all the complexities involved in performing CRUD operations in the underlying storage mechanism. This permits both layers to evolve separately without knowing anything about each other.
+
+The participants in Data Access Object Pattern:
+
+- **Data Access Object Interface** - The interfaces which provides a flexible design. This interface defines the standard operations to be performed on a model object(s).
+
+- **Data Access Object concrete class** - This class implements above interface. This class is responsible to get data from a data source which can be database / xml or any other storage mechanism.
+
+- **Model Object or Value Object** - The model which is transferred from one layer to the other. This object is simple POJO containing get/set methods to store data retrieved using DAO class.
+
+  ![alt text](https://miro.medium.com/max/450/1*4Hnk_8SEiuFWJMP5kwtiog.png )
+The positive is that the application _(the bussiness layer/logic)_ does not know any details about the database as this is DAO’s job.
+#### What is SOA? When to use?
+A service-oriented architecture (SOA) is an architectural pattern in computer software design in which application components provide services to other components via a communications protocol, typically over a network. The principles of service-orientation are independent of any product, vendor or technology. SOA just makes it easier for software components over various networks to work with each other. Web services which are built as per the SOA architecture tend to make web service more independent.
+
+SOA is well-suited for large, complex, enterprise-wide systems that require integration with many heterogeneous applications and services. It is also well-suited for applications that have many shared components, particularly components that are shared across the enterprise."
+
+**Advantages:**
+- Standardized Service Contract
+- Loose Coupling – Less dependency on each other.
+- Service Abstraction - Services hide the logic they encapsulate from the outside world.
+- Service Reusability - Logic is divided into services with the intent of maximizing reuse.
+- Service Statelessness -  This means that services should not withhold information from one state to the other.
 ### Testing
 #### What are unit test, integration test, system test, regression test, acceptance test? What is the major difference between these?
-#### What is code coverage? Why is it used? How you can measure?
-#### What does mocking mean? How would you do it 'manually' (i. e. without using any fancy framework)?
-#### What is a test case? What is an assertion? Give examples!
-#### What is TDD? What are the benefits?
-#### What are the unit testing best practices? (Eg. how many assertion should a test case contain?)
-#### What is arrange/act/assert pattern?
+**Unit test:** The goal of Unit testing is to test each unit separately and ensure that each unit is working as expected. The unit test cases writing and execution is done by the developer (not the tester) to make sure that individual units are working as expected. The scope of Unit testing is narrow, it covers the Unit or small piece of code under test. The smallest part of individual components like functions, procedures, classes, interfaces etc.  The main intention of this activity is to check whether units are working as per design and handling error and exception more neatly. The both positive and negative conditions should handle properly. Unit tests should have no dependencies on code outside the unit tested. Complex dependencies and interactions to the outside world are stubbed or mocked. This is very first step in level of testing and started before doing integration testing.
 
+**Integration test:** Once all modules are developed and integrated with other modules then Integration testing is to be carried out to discover the issues arise when different modules are interacting with each other to build overall system. Integration testing is a type of testing to check if different pieces of the modules are working together. The scope of Integration testing is wide, it covers the whole application under test and it requires much more effort to put together. Integration testing is dependent on other outside systems like databases, hardware allocated for them etc. 
+
+**System test:** System testing is the type of testing to check the behavior of a complete and fully integrated software product based on the software requirements specification (SRS) document. The main focus of this testing is to evaluate Business / Functional / End-user requirements. This is black box type of testing where external working of the software is evaluated with the help of requirement documents & it is totally based on Users point of view. For this type of testing do not required knowledge of internal design or structure or code. This testing is to be carried out only after System Integration Testing is completed. In the integration testing testers are concentrated on finding bugs/defects on integrated modules. But in the Software System Testing testers are concentrated on finding bugs/defects based on software application behavior, software design and expectation of end user. 
+
+**Regression test:** Regression testing is type of testing carried out to ensure that changes made in the fixes or any enhancement changes are not impacting the previously working functionality. It is executed after enhancement or defect fixes in the software or its environment.
+
+**Acceptance test:** User acceptance is a type of testing performed by the Client to certify the system with respect to the requirements that was agreed upon.  This is beta testing of the product & evaluated by the actual end users. The main purpose of this testing is to validate the end to end business flow.
+
+![alt text](https://www.tutorialspoint.com/software_testing_dictionary/images/acceptance_testing.jpg)
+#### What is code coverage? Why is it used? How you can measure?
+Code coverage is an important concept in software testing, which measures to what extent the code of a program is covered by automated tests, ie. how many code lines, methods, etc. are run and tested by the set of tests.
+
+Code coverage is usually measured as a percentage of the functions, statements, branches (eg. if-else), lines of code actually tested when the test suite is run. The bigger the percentage, the smaller the chance that undetected bugs remain in the program.
+#### What does mocking mean? How would you do it 'manually' (i. e. without using any fancy framework)?
+Mocking is primarily used in unit testing. An object under test may have dependencies on other (complex) objects. To isolate the behavior of the object you want to replace the other objects by mocks that simulate the behavior of the real objects. This is useful if the real objects are impractical to incorporate into the unit test. In short, mocking is creating objects that simulate the behavior of real objects.
+#### What is a test case? What is an assertion? Give examples!
+An assertion is a boolean expression at a specific point in a program which will be true unless there is a bug in the program. A test assertion is defined as an expression, which encapsulates some testable logic specified about a target under test. Usually the logic for each test assertion is limited to one single aspect specified. An assertion allows testing the correctness of any assumptions that have been made in the program. If an assertion fails, the method call does not return and an error is reported. If a test contains multiple assertions, any that follow the one that failed will not be executed. For this reason, it's usually best to try for one assertion per test.
+```java
+Example:
+
+public int Add (int num1, int num2)
+{
+    return num1 + num2 
+}
+
+
+int expected = 5
+Int actual = Add(2, 3)
+
+AssertEqual(expected, actual)
+```
+#### What is TDD? What are the benefits?
+Test Driven Development is an innovative software development approach where tests are written before writing the bare minimum of code required for the test to be fulfilled. The code will then be refactored, as often as necessary, in order to pass the test, with the process being repeated for each piece of functionality. With TDD, tests will be automated, saving a lot of time compared to manually testing functionality. Writing tests, followed by minimum code changes after each test run, will make sure there is good unit test coverage for the software which will again contribute to the overall quality of the product. Tests written ahead of time will also ensure good code quality.
+#### What are the unit testing best practices? (Eg. how many assertion should a test case contain?)
+1. Naming your tests: The name of your test should consist of three parts:
+- The name of the method being tested.
+- The scenario under which it's being tested.
+- The expected behavior when the scenario is invoked.
+
+For example: Add_SingleNumber_ReturnsSameNumber()
+
+2. Avoid logic in tests: When writing your unit tests avoid manual string concatenation and logical conditions such as if, while, for, etc.
+3. Check only a single thing in one test method (practically: use 1 assert per test method)
+5. Use separate folder for tests as you might not want to deliver (ie. give to the user) your test along with the production code.
+
+#### What is arrange/act/assert pattern?
+Arrange, Act, Assert is a common pattern when unit testing. As the name implies, it consists of three main actions:
+1. **Arrange** your objects, creating and setting them up as necessary.
+2. **Act** on an object.
+3. **Assert** that something is as expected.
+
+``` C#
+public void Add_EmptyString_ReturnsZero()
+{
+    // Arrange
+    var stringCalculator = new StringCalculator();
+
+    // Act
+    var actual = stringCalculator.Add("");
+
+    // Assert
+    Assert.Equal(0, actual);
+}
+```
 ### DevOps
 #### What is continuous integration? Why is CI important?
+Continuous Integration (CI) is the process of automating the build and testing of code every time a team member commits changes to version control.triggers the automated build and testing processes.
+Each commit triggers the automated build and testing process, so CI keeps the master branch up-to -date allowing teams to detect problems early. By integrating regularly, you can detect errors quickly, and locate them more easily. Integrate as often as possible, this will lead to small or non-existent merge conflicts and bugs.
 #### Why are tests important in the CI workflow?
+The developer's changes are validated by creating a build and running automated tests against the build. By doing so, you avoid the integration hell that usually happens when people wait for release day to merge their changes into the release branch.
+
+Continuous integration puts a great emphasis on testing automation to check that the application is not broken whenever new commits are integrated into the main branch.
+
+A nicely working CI process needs the following:
+
+- Good unit testing coverage
+- Automation: tests need to run with every commit / merge automatically.
+- Ideally many kinds of tests: integration testing, UI testing, acceptance testing.
 #### Name some software that help the CI workflow!
+- Jenkins - Currently the number one open source software.
+- TeamCity from jetbrains.
+- Travis
 #### What is Continuous Delivery?
+Continuous delivery is an extension of continuous integration to make sure that you can release new changes to your customers quickly in a sustainable way. This means that on top of having automated your testing, you also have automated your release process and you can deploy your application at any point of time by clicking on a button, thus acceleration the feedback loop with your customers.
 #### What is Continuous Deployment?
+Continuous deployment is like continuous delivery, except that releases happen automatically. Developers can focus on building software, and they see their work go live minutes after they've finished working on it.
+
+
+![alt text](https://notafactoryanymore.files.wordpress.com/2014/08/cdvscd1.png)
+
 #### What is DevOps?
+DevOps  is a new practice and job role in Software development that emerged from the birth of the cloud and agile methodologies. It can be seen as an evolution of the SysAdmin role, but requires much more knowledge.
+
+Typical tasks of a DevOps person is everything IT related except actually writing the software. In practice this means the following:
+- Build systems that enable CI/CD workflows
+- Manage the "cloud", set up its infrastructure, security, install and configure apps
+- Make sure that there are monitoring and alerting systems in place in case of issues
+- Automate everything: deployments, releases, upgrades.
+
+This practice help engineers independently accomplish tasks (for example, deploying code or provisioning infrastructure) that normally would have required help from other teams.
 
 ### Software Methodologies
 #### What kind of software-lifecycle models do you know?
-#### What is a UML diagram? What kind of diagram types do you know?
-#### What is a UML class diagram? What are the typical elements?
-#### What kind of design patterns do you know? Bring at least 3 examples.
-#### What is the purpose of the Iterator Pattern?
-#### What do you know about the SOLID principles?
-#### How would you separate data storage code and business logic code (which uses stored data) in an application?
+A software lifecycle model is a standardised format for planning, organising and running a new development project. 
 
+Agile, Lean, Waterfall, Iterative, Spiral, DevOps, Extreme Programming, Rapid Prototyping
+#### What is a UML diagram? What kind of diagram types do you know?
+The Unified Modeling Language is a standard visual modeling language intended to be used for modeling business and similar processes, analysis, design, and implementation of software-based systems.
+UML is a common language for business analysts, software architects and developers used to describe, specify, design, and document existing or new business processes, structure and behavior of artifacts of software systems.
+
+There are two main categories; structure diagrams and behavioral diagrams:
+1. Structure Diagrams
+- Class Diagram
+- Component Diagram
+- Deployment Diagram
+- Object Diagram
+...
+
+2. Behavioral Diagrams
+- Use Case Diagram
+- Activity Diagram
+- State Machine Diagram
+- Sequence Diagram
+- Communication Diagram
+- Timing Diagram
+#### What is a UML class diagram? What are the typical elements?
+A class diagram in the Unified Modeling Language (UML) is a type of static structure diagram that describes the structure of a system by showing the system's classes, their attributes, methods, and the relationships among objects.
+
+The class diagram is the main building block of object-oriented modeling.
+
+Elements:
+- Class
+- Attribute
+- Generalization
+- Association
+- Multiplicity
+- Aggregation
+#### What kind of design patterns do you know? Bring at least 3 examples.
+**Factory Pattern** - In Factory pattern, we create object without exposing the creation logic to the client and refer to newly created object using a common interface.
+
+**Singleton Pattern** - This pattern involves a single class which is responsible to create an object while making sure that only single object gets created. This class provides a way to access its only object which can be accessed directly without need to instantiate the object of the class.
+
+**Iterator Pattern** - This pattern is used to get a way to access the elements of a collection object in sequential manner without any need to know its underlying representation. The elements of an aggregate object can be accessed and traversed without exposing its representation (data structures).
+
+**MVC Pattern** - MVC Pattern stands for Model-View-Controller Pattern. This pattern is used to separate application's concerns. 
+#### What is the purpose of the Iterator Pattern?
+This pattern is used to get a way to access the elements of a collection object in sequential manner without any need to know its underlying representation. The elements of an aggregate object can be accessed and traversed without exposing its representation (data structures).
+#### What do you know about the SOLID principles?
+These 5 principles were introduced by Robert C. Martin (Uncle Bob), in his 2000 paper Design Principles and Design Patterns. The intention of these principles is to make software designs more understandable, easier to maintain and easier to extend.
+
+**S — Single responsibility principle**
+Every module or class should have responsibility over a single part of the functionality provided by the software.
+
+**O — Open/closed principle**
+"Software entities ... should be open for extension, but closed for modification."
+We can make sure that our code is compliant with the open/closed principle by utilizing inheritance and/or implementing interfaces that enable classes to polymorphically substitute for each other.
+
+**L — Liskov substitution principle**
+"Objects in a program should be replaceable with instances of their subtypes without altering the correctness of that program."
+If S is a subtype of T, then objects of type T may be replaced (or substituted) with objects of type S. More generally it states that objects in a program should be replaceable with instances of their subtypes without altering the correctness of that program.
+
+**I — Interface segregation principle**
+"Many client-specific interfaces are better than one general-purpose interface."
+No client should be forced to depend on methods it does not use. Put more simply: Do not add additional functionality to an existing interface by adding new methods. Instead, create a new interface and let your class implement multiple interfaces if needed.
+
+**D - Dependency inversion principle**
+"One should "depend upon abstractions, [not] concretions."
+Dependency inversion principle is a way to decouple software modules. This principle states that High-level modules should not depend on low-level modules. Both should depend on abstractions. Abstractions should not depend on details. Details should depend on abstractions.
+
+#### How would you separate data storage code and business logic code (which uses stored data) in an application?
+Using MVC design pattern.
 ## Computer science
 
 ### Data Structures
 #### What is the difference between Stack and Queue data structure?
+Stack and Queue both are the non-primitive data structures. The main differences between stack and queue are that stack uses LIFO (last in first out) method to access and add data elements whereas Queue uses FIFO (First in first out) method to access and add data elements. **Use  a  queue when you want to get things out in the order that you put them in. Use  a  stack  when you want to get things out in the reverse order than you  put  them in.**
 #### What is a graph? What are simple graphs? What are directed graphs? What are weighted graphs?
+A Graph is a non-linear (hierarchical)data structure consisting of nodes and edges. The nodes are sometimes also referred to as vertices and the edges are lines or arcs that connect any two nodes in the graph. A node is a basic unit of a data structure, such as a linked list or tree data structure. Nodes contain data and also may link to other nodes. Links between nodes are often implemented by pointers.
+
+**Simple graph:** A graph with no loops and no parallel edges is called a simple graph.
+**Directed graph:** In a directed graph, each edge has a direction.
+**Weighted graphs:** Each edge of a graph has an associated numerical value, called a weight. Usually, the edge weights are non-negative integers. Weighted graphs may be either directed or undirected.
 #### What are trees? What are binary trees? What are binary search trees?
+- **Tree** is a non-linear, complex graph that has no cycle and it contain nodes. Each node in a tree has zero or more child node, which are below it in the tree. In a tree there exist only one path between any two vertices whereas a graph can have unidirectional and bidirectional paths between the nodes. In the tree, there is exactly one root node, and every child can have only one parent. As against, in a graph, there is no concept of the root node. Unlike Arrays, Linked Lists, Stack and queues, which are linear data structures, trees are hierarchical data structures. 
+- **Binary Tree** is a type of tree where each node has at most 2 children.
+- **Binary search tree** is a binary tree whereas the node's left/right children is lesser/greater than that node and each node follows this principle.
+
+The above properties of Binary Search Tree provide an ordering among keys so that the operations like search, minimum and maximum can be done fast.
 #### How can you store graphs in programs? What are the advantages/disadvantages per each?
+In a List<Map<Integer(value), Integer(weight)>>  or in a adjacency matrix.
 #### What are graph traversal algorithms? What is BFS, how does it work? What is DFS, how does it work?
+Breadth-First Search (BFS) is an algorithm used to traverse through all of the nodes within a graph, tree, etc. It uses a Queue, which is a list of the nodes the algorithm is going to visit, and the algorithm ends when the Queue is empty (indicating that their are no more nodes to be visited).
+
+Pseudocode:
+```
+initialize queue
+initialize start node
+ 
+enqueue start node to queue
+set the start node as visited
+ 
+while the queue isn't empty
+    dequeue a node from the queue
+	
+    get the node's neighbors
+    for each of the node's neighbors
+        if the neighbor hasn't been visited
+	    enqueue the neighbor to the queue
+	    mark the neighbor as visited
+```
+Depth-First Search (DFS) is a recursive algorithm that uses the idea of backtracking. It involves exhaustive searches of all the nodes by going ahead, if possible, else by backtracking. This recursive nature of DFS can be implemented using stacks. 
+
+The basic idea is as follows:
+Pick a starting node and push all its adjacent nodes into a stack.
+Pop a node from stack to select the next node to visit and push all its adjacent nodes into a stack.
+Repeat this process until the stack is empty. However, ensure that the nodes that are visited are marked. This will prevent you from visiting the same node more than once. If you do not mark the nodes that are visited and you visit the same node more than once, you may end up in an infinite loop.
+
+Pseudocode:
+```
+DFS-iterative (graph, root):                                   
+    let S be stack
+    S.push(root)            
+    mark root as visited.
+    while (S is not empty):
+        // Pop a vertex from stack to visit next
+        v  =  S.pop()
+        // Push all the neighbours of v in stack that are not visited   
+        for all neighbours w of v in Graph G:
+            if w is not visited :
+                S.push(w)         
+                mark w as visited
+ 
+ 
+DFS-recursive(graph, root):
+    mark root as visited
+    for all neighbours w of root in Graph G:
+        if w is not visited:
+            DFS-recursive(G, w)
+```
 #### How does dictionary work?
+HashMap in Java works on hashing principle. It is a data structure which allows us to store object and retrieve it in constant time O(1) provided we know the key. In hashing, hash functions are used to link key and value in HashMap.
+
+When we call put method, hashcode() method of the key object is called so that hash function of the map can find a bucket location to store value object. When you want to retrieve the object, you call the get() method and again pass the key object. This time again key object generate same hash code (it's mandatory for it to do so to retrieve the object and that's why HashMap keys are immutable e.g. String) and we end up at same bucket location.
 #### Why is it important for keys in a hashmap to have an immutable type? (Consider string for example.)
+If immutable, the object's hashcode wont change and it allows caching the hashcode of different keys which makes the overall retrieval process very fast. Also for mutable objects ,the hashCode() might be dependent on fields that could change, if this happens you wont be able to find the key (and its value) in the HashMap since hashCode() returns different value.
+
 
 ### Algorithms
 #### What is QuickSort? Describe the main logic of this sorting algorithm.
+QuickSort is one of the most efficient sorting algorithms and is based on the splitting of an array into smaller ones. We choose a pivot from and array(like most right element) and everything lower than the pivot element goes to the left partition and the right to the right. Using pivot algorithm recursively, we end up with smaller possible partitions. Each partition is then processed for quick sort. The name comes from the fact that, quick sort is capable of sorting a list of data elements significantly faster than any of the common sorting algorithms. It's worst case complexity is  O(nLogn).
+
+Quicksort first divides a large array into two smaller sub-arrays: the low elements and the high elements. Quicksort can then recursively sort the sub-arrays. The steps are:
+
+1. Pick an element, called a pivot, from the array.
+2. Partitioning: reorder the array so that all elements with values less than the pivot come before the pivot, while all elements with values greater than the pivot come after it (equal values can go either way). After this partitioning, the pivot is in its final position. This is called the partition operation.
+3. Recursively apply the above steps to the sub-array of elements with smaller values and separately to the sub-array of elements with greater values.
+
 
 ## Software design
 
 ### Security
-
 #### What is OAuth2?
-#### What is Basic Authentication?
-#### What is CORS, why it’s needed in browsers?
-#### How can you initialize a CSRF attack?
-#### What is JWT used for? Where to store it on client side?
+OAuth 2 is an authorization framework that enables applications to obtain limited access to user accounts on an HTTP service, such as Facebook, GitHub, Amazon... It works by delegating user authentication to the service that hosts the user account, and authorizing third-party applications to access the user account. It is commonly used as a way for Internet users to grant websites or applications access to their information on other websites but without giving them the passwords. OAuth essentially allows access tokens to be issued to third-party clients by an authorization server, with the approval of the resource owner. The third party then uses the access token to access the protected resources hosted by the resource server. OAuth 2 provides authorization flows for web and desktop applications, and mobile devices.
 
+![alt text](https://assets.digitalocean.com/articles/oauth/abstract_flow.png
+ "oauth")
+#### What is Basic Authentication?
+Basic authentication is a simple authentication scheme built into the HTTP protocol. The client sends HTTP requests with the Authorization: Basic header, followed by credentials in the base64 encoding of id and password joined by a single colon (username:password).
+
+#### What is CORS, why it’s needed in browsers?
+origin. A web application executes a cross-origin HTTP request when it requests a resource that has a different origin (domain, protocol, or port) from its own. An example of a cross-origin request: the front-end JavaScript code served from https://domain-a.com uses XMLHttpRequest to make a request for https://domain-b.com/data.json.
+
+CORS is a way to bypass the "Same Origin Policy" which is the security measure preventing you from making ajax requests to a different domain.
+
+**Same Origin Policy**
+For security reasons, browsers restrict cross-origin HTTP requests initiated from scripts. The Same Origin Policy states that a website on one domain cannot make an xhr request to another domain. This prevents a malicious website from making requests to a known website (think Facebook or Google). For example, XMLHttpRequest and the Fetch API follow the same-origin policy.
+This means that a web application using those APIs can only request resources from the same origin the application was loaded from unless the response from other origins includes the right CORS headers.
+#### How can you initialize a CSRF attack?
+Cross Site Request Forgery attack happens when a malicious user forces a client to do an unwanted action in a website when he is authenticated. This can only happen if the user is authenticated to the website i.e webtoken. 
+Let's say I create a script whit a big red button "click me to get discount" etc. and the client just clicks on it and it's already shared his data to the malicious user.
+#### What is JWT used for? Where to store it on client side?
+JSON Web Token (JWT) is an Internet standard for creating JSON-based access tokens that assert some number of claims. For example, a server could generate a token that has the claim "logged in as admin" and provide that to a client. The client could then use that token to prove that it is logged in as admin. The tokens are signed by one party's private key (usually the server's), so that both parties (the other already being, by some suitable and trustworthy means, in possession of the corresponding public key) are able to verify that the token is legitimate.
+
+In authentication, when the user successfully logs in using their credentials, a JSON Web Token will be returned and must be saved locally (typically in local or session storage, but cookies can also be used), instead of the traditional approach of creating a session in the server and returning a cookie.
 ### Threaded programming
 
 #### When do you need to use threads in an application?
+Multithreading is a widespread programming and execution model that allows multiple threads to exist within the context of one process. These threads share the process's resources, but are able to execute independently. The threaded programming model provides developers with a useful abstraction of concurrent execution. Multithreaded applications have the following advantages:
+- Responsiveness
+- Faster execution
+- Lower resource consumption
+- Parallelization: applications looking to use multicore or multi-CPU systems can use multithreading to split data and tasks into parallel subtasks and let the underlying architecture manage how the threads run
+
 #### What is a daemon thread?
+Daemon thread is a low priority thread that runs in background to perform tasks such as garbage collection. Traditionally daemon processes in UNIX were those that were constantly running in background, much like services in Windows. A daemon thread in Java is one that doesn't prevent the JVM from exiting. Specifically the JVM will exit when only daemon threads remain.
+
 #### What is the difference between concurrent and parallel execution of code?
+![alt text](https://user.oc-static.com/upload/2019/12/16/15765121029628_0715%20Concurrency%20images-09%20%281%29.jpg "concurrent vs parallel")
+
+
+Concurrency and parallelism are two related but distinct concepts.
+
+**Concurrency** means that two or more calculations happen within the same time frame, and there is usually some sort of dependency between them. It's a form of computing in which several computations are executed during overlapping time periods — concurrently —instead of sequentially. A concurrent system is one where a computation can advance without waiting for all other computations to complete. (async-await)
+
+**Parallelism** means that two or more calculations happen simultaneously. Parallel programming means using a set of resources to solve some problem in less time by dividing the work. This is the abstract definition and it relies on this part: solve some problem in less time by dividing the work (source). Code running in parallel can utilize threads, but code can be executed on different physical machines as well, crossing "thread-boundaries" (cluster)
+
+Put boldly, concurrency describes a problem (two things need to happen together), while parallelism describes a solution (two processor cores are used to execute two things simultaneously).
+
 #### What is the most important problem developers are faced when using threads?
+- Resource contention - a conflict over access to a shared resource 
+- Race condition - because resource contention exists program can and do arise when multiple threads are executing. They're racing for accessing a database or file. 
+- Synchronization. With the use of Locks, Semaphores, Queues, etc. programmers can avoid or control race conditions.
+- Deadlock - a deadlock occurs when a thread enters a waiting state because a requested system resource is held by another waiting process.
+
 #### In what kind of situations can deadlocks occur?
+A deadlock occurs when a thread enters a waiting state because a requested system resource is held by another waiting process, which in turn is waiting for another resource held by another waiting process. Held in this context means that there's some locking or synchronization in place. A deadlock is a state in which each member of a group is waiting for another member, including itself, to take action, such as sending a message or more commonly releasing a lock. Deadlock is a common problem in multiprocessing systems, parallel computing, and distributed systems, where software and hardware locks are used to arbitrate shared resources and implement process synchronization
+
 #### What are possible ways to prevent deadlocks from occurring?
+Deadlock prevention works by preventing one of the four Coffman conditions from occurring.
+
+- Eliminate Mutual Exclusion: no process will have exclusive access to a resource. Algorithms that avoid mutual exclusion are called non-blocking synchronization algorithms.
+- Eliminate Hold and wait: requiring processes to request all the resources they will need before starting up. 
+- Eliminate No Preemption: Preempt resources from the process when resources required by other high priority processes.
+- Eliminate Circular Wait: disabling interrupts during critical sections and using a hierarchy to determine a partial ordering of resources. Each resource will be assigned with a numerical number. A process can request the resources in the order of numbering.
+
 #### What does critical section or critical region mean in the context of concurrent programming?
+In concurrent programming, concurrent accesses to shared resources can lead to unexpected behavior, so parts of the program where the shared resource is accessed need to be protected in ways that avoid the concurrent access. This protected section is the critical section or critical region. It cannot be executed by more than one process at a time. Typically, the critical section accesses a shared resource, such as a data structure, a peripheral device, or a network connection, that would not operate correctly in the context of multiple concurrent accesses.
